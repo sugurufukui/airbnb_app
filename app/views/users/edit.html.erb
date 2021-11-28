@@ -1,0 +1,29 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3" >
+		<%= form_with(model: @user, local: true) do |f| %>
+			<div class="center field">
+				<h2>アカウント編集</h2>
+			</div>
+			<%= render 'shared/error_messages', object: f.object %>
+			<div class="field">
+				<%= f.label :メールアドレス %>
+				<%= f.text_field :name, class: 'form-control' %>
+			</div>
+			<div class="field">
+				<%= f.label :変更後パスワード（変更する場合のみ入力） %>
+				<%= f.password_field :password, class: 'form-control' %>
+			</div>
+			<div class="field">
+				<%= f.label :パスワード確認用（変更する場合のみ入力） %>
+				<%= f.password_field :password_confirmation, class: 'form-control' %>
+			</div>
+			<div class="field">
+				<%= f.label :現在のパスワード %>
+				<%= f.password_field :password, class: 'form-control' , placeholder: "現在のパスワードを入力"%>
+			</div>
+			<div class="field">
+				<%= f.submit "更新", class: "btn btn-primary form-control" %>
+			</div>
+		<% end%>
+	</div>
+</div>
