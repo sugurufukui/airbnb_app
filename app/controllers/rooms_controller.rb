@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
 	def index
-		@room = Room.all
+		@rooms = Room.all
+		binding.pryroo
 	end
 
 	def show
@@ -13,13 +14,13 @@ class RoomsController < ApplicationController
 
 	def create
 		@room = Room.new(room_params)
-		@room.image.attach(params[:room][:image])
-
+		@room.room_image.attach(params[:room][:room_image])
+		@room.user = current_user
 		if @room.save
 			flash[:success] = "ルームを登録しました"
-			redirect_to room_path(room)
+			redirect_to @room
 		else
-			render 'new'
+		render 'new'
 		end
 	end
 
@@ -40,5 +41,5 @@ end
 private
 
 	def room_params
-		params.require(:room).permit(:name, :introduction, :price, :address, :image)
+		params.require(:room).permit(:user_id, :name, :introduction, :price, :address, :room_image)
 	end

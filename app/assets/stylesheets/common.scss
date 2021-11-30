@@ -110,10 +110,21 @@ p {
   padding-left: 10px;
 }
 
-/*ユーザーアイコン*/
-.image{
-  width: 65px;
-  height: 65px;
-  object-fit: cover;
-  border-radius: 50px;
+// /*ユーザーアイコン*/
+// .image{
+//   width: 65px;
+//   height: 65px;
+//   object-fit: cover;
+//   border-radius: 50px;
+// }
+
+/*登録ルーム*/
+table th {
+  background-color: #e9e4dd46;
+  padding: 10px 20px;
+}
+
+table td {
+  background-color: #e2ded741;
+  padding: 10px 20px;
 }

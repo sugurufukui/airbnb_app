@@ -2,30 +2,30 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
 
-def index
-  @user = User.find_by(params[:id])
-end
-
-def show
-  @user = User.find(params[:id])
-end
-
-def new
-  @user = User.new
-end
-
-def create
-  @user = User.new(user_params)
-  @user.avatar.attach(params[:user][:avatar])
-
-  if @user.save
-    log_in @user
-    flash[:success] = "ようこそ！！"
-    redirect_to @user
-  else
-    render 'new'
+  def index
+    @user = User.find_by(params[:id])
   end
-end
+
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    @user.avatar.attach(params[:user][:avatar])
+
+    if @user.save
+      log_in @user
+      flash[:success] = "ようこそ！！"
+      redirect_to @user
+    else
+      render 'new'
+    end
+  end
 
 
   def edit

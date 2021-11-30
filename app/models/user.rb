@@ -14,8 +14,8 @@ class User < ApplicationRecord
 	validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
 	validates :avatar, content_type: {in: %w[image/jpeg image/gif image/png],
-									  message: "有効な画像形式である必要があります"	},
-						 size:  {less_than: 5.megabytes,
-										message: "ファイルサイズが5MB未満のものを選んでください" }
+													message: "有効な画像形式である必要があります"	},
+														size:  {less_than: 5.megabytes,
+													message: "ファイルサイズが5MB未満のものを選んでください" }
 
 end
