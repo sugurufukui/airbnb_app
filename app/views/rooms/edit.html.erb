@@ -4,6 +4,7 @@
 			<div class="center field">
 				<h2>ルーム登録編集</h2>
 			</div>
+			<%= render 'shared/error_messages', object: f.object %>
 			<div class="field">
 				<%= f.label :ルーム名 %>
 				<%= f.text_field :name, class: 'form-control', placeholder: "ルーム名を入力" %>
@@ -22,10 +23,15 @@
 			</div>
 			<div class="field">
 				<%= f.label :ルーム画像 %>
-				<%= f.file_field :image%>
+				<br><%= image_tag @room.room_image, :size => '200x200' %></br>
 			</div>
 			<div class="field">
-				<%= f.submit "ルームを登録する", class: "btn btn-primary form-control" %>
+				<%= f.file_field :room_image %>
+			</div>
+			<div class="field">
+				<%= f.submit "ルーム情報を更新する", class: "btn btn-primary form-control" %>
 			</div>
 
 		<% end%>
+	</div>
+</div>

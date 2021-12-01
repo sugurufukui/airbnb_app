@@ -12,19 +12,16 @@
         <th>削除</th>
       </tr>
     </thead>
-
-
-
     <tbody>
 			<%= form_with(model: @room, local: true) do |f| %>
 
 				<% @rooms.each do |room| %>
 					<tr>
-						<td><%= image_tag @room.room_image, :size => '200x200' if @room.room_image.attached? %></td>
+						<td><%= image_tag room.room_image, :size => '100x100' %></td>
 						<td><%= room.name %></td>
 						<td><%= room.introduction %></td>
-						<td><%= room.price %></td>
-						<td><%= room.created_at.to_s(:datetime_jp)  %></td>
+						<td><%= number_to_currency( room.price, unit: "¥", format: "%u %n" ) %></td>
+						<td><%= room.created_at.to_s(:datetime_ymd_jp)  %></td>
 						<td><%= link_to "編集", [:edit, room]%></td>
 						<td><%= link_to "削除", room, method: :delete, data: {confirm:"本当に削除しますか？"}%></td>
 					</tr>

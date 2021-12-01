@@ -1,7 +1,9 @@
 class RoomsController < ApplicationController
 	def index
-		@rooms = Room.all
-		binding.pryroo
+		@rooms = current_user.rooms
+		@room = Room.find_by(params[:id])
+		@user = current_user
+		# binding.pry
 	end
 
 	def show
@@ -30,10 +32,18 @@ class RoomsController < ApplicationController
 
 	def update
 		@room = Room.find(params[:id])
+		if @room.update(room_params)
+			flash[:success] = "ルーム情報を更新しました"
+			redirect_to @room
+		else
+			render 'edit'
+		end
 	end
 
 	def destroy
-		@room = Room.find(params[:id])
+		@room = Room.find(params[:id]).destroy
+		flash[:success] = "#{@room.name}のルーム情報を削除しました"
+		redirect_to rooms_url
 	end
 end
 
