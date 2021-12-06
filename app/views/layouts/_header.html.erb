@@ -1,0 +1,43 @@
+<header class = "navbar navbar-fixed-top navbar-inverse">
+	<div class = "container">
+    <%= link_to "poteshare", root_path, class: "logo" %>
+
+    <div class="collapse navbar-collapse">
+      <div class="d-flex">
+        <%= form_tag "#", :method => 'get' do %>
+          <div class="me-2 d-flex">
+            <%= text_field_tag :search, params[:description], placeholder: "キーワード",class: "form-control" %>
+            <%= submit_tag "検索", :name => nil, class:"btn btn-normal" ,style:"margin-left: 10px;"%>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+    <nav>
+      <ul class = "nav navbar-nav navbar-right">
+        <% if logged_in? %>
+          <li class ="logo"><%= current_user.name %></li>
+          <li class = "dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <%= user_avatar %><b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%=link_to "ルーム登録", new_room_path%></li>
+              <li><%=link_to "予約済みルーム一覧", reservations_path %></li>
+              <li><%=link_to "登録済みルーム一覧", rooms_path %></li>
+              <li><%=link_to "プロフィール", current_user %></li>
+              <li class="divider"></li>
+              <li><%=link_to "ログアウト", logout_path %></li>
+            </ul>
+          </li>
+        <% else %>
+
+          <ul>
+            <li><%= link_to "ログイン", login_path, class: 'btn btn-primary' %></li>
+            <li><%= link_to "登録する", signup_path, class: 'btn btn-default' %></li>
+          </ul>
+        <% end %>
+    </nav>
+	</div>
+</header>

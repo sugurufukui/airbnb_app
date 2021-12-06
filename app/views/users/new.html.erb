@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3" >
+		<%= form_with(model: @user, local: true) do |f| %>
+			<%= render 'shared/error_messages', object: f.object %>
+			<div class="center field">
+				<h2>新しいアカウントを作成</h2>
+			</div>
+			<div class="field">
+				<%= f.text_field :name, class: 'form-control', placeholder: "ユーザー名" %>
+			</div>
+			<div class="field">
+				<%= f.text_field :email, class: 'form-control', placeholder: "メールアドレス" %>
+			</div>
+			<div class="field">
+				<%= f.password_field :password, class: 'form-control', placeholder: "パスワード" %>
+			</div>
+			<div class="field">
+				<%= f.password_field :password_confirmation, class: 'form-control', placeholder: "パスワード確認" %>
+			</div>
+			<div class="field">
+				<%= f.submit "新しいアカウントを作成する", class: "btn btn-primary form-control" %>
+			</div>
+			<div class="field">
+				<%= link_to "既にアカウントをお持ちの方はログイン", login_path, class: 'btn btn-default form-control' %>
+			</div>
+
+
+		<% end%>
+	</div>
+</div>
