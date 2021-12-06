@@ -1,32 +1,51 @@
 <div class="row">
-	<div class="col-md-7">
-		<%= form_with(model: @room, local: true) do |f| %>
+	<div class="col-md-6">
+		<div class="field">
+			<%= image_tag @room.room_image, :size => '400x240' if @room.room_image.attached? %>
+		</div>
+	</div>
+	<div class="col-md-4 col-md-offset-2" >
+		<%= form_with(model: @room.reservations.new, local: true) do |f| %>
 			<%= render 'shared/error_messages', object: f.object %>
+			<%= f.hidden_field :room_id, :value => @room.id %>
+			<%= f.hidden_field :user_id, :value => @user.id %>
 			<div class="field">
-				<%= image_tag @room.room_image, :size => '200x200' if @room.room_image.attached? %>
+				<%= "¥ #{@room.price}/日" %>
+			</div>
+			<div class="field">
+				<%= f.label :チェックイン %>
+				<%= f.date_select :start_date %>
+			</div>
+			<div class="field">
+				<%= f.label :チェックアウト %>
+				<%= f.date_select :end_date %>
+			</div>
+			<div class="field">
+				<%= f.label :人数 %>
+				<%= f.number_field :person_num %>
+			</div>
+			<div class="field">
+				<%= f.submit "予約する", class: "btn btn-primary form-control" %>
 			</div>
 		<% end%>
 	</div>
-	<div class="col-md-4 col-md-offset-1" >
-		<%= form_with(model: @room, local: true) do |f| %>
-			<div class="field">
-				<%= f.label :ルーム名 %>
-				<%= f.text_field :name, class: 'form-control', placeholder: "ルーム名を入力" %>
-			</div>
-			<div class="field">
-				<%= f.label :ルーム紹介 %>
-				<%= f.text_area :introduction, class: 'form-control', placeholder: "ルーム説明を入力" %>
-			</div>
-			<div class="field">
-				<%= f.label :料金 %>
-				<%= f.text_field :price, class: 'form-control', placeholder: "1日あたりの料金を入力" %>
-			</div>
-			<div class="field">
-				<%= f.label :住所 %>
-				<%= f.text_field :address, class: 'form-control', placeholder: "住所を入力" %>
-			</div>
-			<div class="field">
-				<%= f.submit "ルームを登録する", class: "btn btn-primary form-control" %>
-			</div>
 
-		<% end%>
+<div class="col-md-12" >
+	<%= form_with(model: @room, local: true) do |f| %>
+		<div class="field">
+			<%= user_avatar %>
+		</div>
+		<div class="field">
+		<%= f.label :ルーム名 %>
+			<%= @room.name %>
+		</div>
+		<div class="field">
+			<%= f.label :住所 %>
+			<%= @room.address %>
+		</div>
+		<div class="field">
+			<%= f.label :ルーム紹介 %>
+			<%= @room.introduction %>
+		</div>
+	<% end%>
+</div>

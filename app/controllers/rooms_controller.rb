@@ -3,15 +3,20 @@ class RoomsController < ApplicationController
 		@rooms = current_user.rooms
 		@room = Room.find_by(params[:id])
 		@user = current_user
-		# binding.pry
+		if
+      @rooms = Room.search(params[:search])
+			@room = Room.find_by(params[:id])
+    end
 	end
 
 	def show
 		@room = Room.find(params[:id])
+		@user = current_user
 	end
 
 	def new
 		@room = Room.new
+		@user = current_user
 	end
 
 	def create
@@ -20,7 +25,7 @@ class RoomsController < ApplicationController
 		@room.user = current_user
 		if @room.save
 			flash[:success] = "ルームを登録しました"
-			redirect_to @room
+			redirect_to new_reservation_path
 		else
 		render 'new'
 		end
@@ -28,6 +33,7 @@ class RoomsController < ApplicationController
 
 	def edit
 		@room = Room.find(params[:id])
+		@user = current_user
 	end
 
 	def update
